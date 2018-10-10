@@ -314,12 +314,9 @@ type AmbiguousLocationError struct {
 
 func (ale AmbiguousLocationError) Error() string {
 	var candidates []string
-	if ale.CandidatesLocation != nil {
-		for i := range ale.CandidatesLocation {
+	for i := range ale.CandidatesLocation {
 			candidates = append(candidates, ale.CandidatesLocation[i].Function.Name())
-		}
-
-	} else {
+		} else {
 		candidates = ale.CandidatesString
 	}
 	return fmt.Sprintf("Location \"%s\" ambiguous: %s…", ale.Location, strings.Join(candidates, ", "))
